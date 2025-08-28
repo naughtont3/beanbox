@@ -14,7 +14,7 @@ Automated test script that discovers and tests all Java projects under `src/`.
 - Automatically handles Java dependencies within each project directory
 - Runs tests specified in `test.txt` manifest files
 - Supports passing command-line arguments to test programs
-- Cross-platform compatible (Windows, macOS, Linux)
+- Cross-platform compatible (macOS, Linux)
 
 **Usage:**
 ```bash
@@ -50,7 +50,7 @@ HelloWorld2
 The `sanity-test.sh` script is called by the GitHub Actions CI workflow (`.github/workflows/ci.yml`) to ensure all Java programs build and run correctly across multiple platforms and Java versions.
 
 **CI Matrix:**
-- **Operating Systems:** Ubuntu, Windows, macOS
+- **Operating Systems:** Ubuntu, macOS
 - **Java Versions:** 17, 21
 
 ## Adding New Projects
