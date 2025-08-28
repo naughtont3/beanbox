@@ -10,7 +10,8 @@ Automated test script that discovers and tests all Java projects under `src/`.
 
 **Features:**
 - Auto-discovers all subdirectories under `src/`
-- Builds projects using Makefile (if present) or direct javac compilation
+- Builds projects using traditional `javac *.java` compilation (avoids Make for cross-platform compatibility)
+- Automatically handles Java dependencies within each project directory
 - Runs tests specified in `test.txt` manifest files
 - Supports passing command-line arguments to test programs
 - Cross-platform compatible (Windows, macOS, Linux)
@@ -56,9 +57,8 @@ The `sanity-test.sh` script is called by the GitHub Actions CI workflow (`.githu
 To add a new Java project for testing:
 
 1. Create your project directory under `src/YourProjectName/`
-2. Add your Java source files
-3. (Optional) Create a Makefile for custom build steps
-4. Create a `test.txt` file listing the main classes to test
-5. The CI will automatically discover and test your project
+2. Add your Java source files (dependencies like shared classes should be in the same directory)
+3. Create a `test.txt` file listing the main classes to test
+4. The CI will automatically discover and test your project
 
-The test script will handle compilation automatically, either using your Makefile or by directly invoking javac on all .java files.
+The test script will handle compilation automatically by invoking `javac *.java`, which compiles all Java files in the directory and automatically resolves dependencies between them.

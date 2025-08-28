@@ -11,7 +11,14 @@ A simple Java example demonstrating object-oriented programming concepts for new
 
 ## Basic Java Commands
 
-Compile manually:
+Compile all files together (recommended):
+```bash
+javac *.java
+java HelloWorld1
+java HelloWorld2
+```
+
+Or compile individually:
 ```bash
 javac Person.java HelloWorld1.java
 java HelloWorld1
@@ -22,7 +29,7 @@ java HelloWorld2
 
 ## Building and Running (Make Targets)
 
-For faster/easier building, use the provided Makefile:
+For faster/easier building when working in this directory, use the provided Makefile:
 
 Compile both versions:
 ```bash
@@ -44,9 +51,14 @@ Clean compiled files:
 make clean
 ```
 
+## CI Integration
+
+This project is automatically tested by the repository's CI system using `javac *.java` compilation, which ensures cross-platform compatibility and proper dependency resolution.
+
 ## What You'll Learn
 
 - Class instantiation and constructors
 - Method calls and parameters
 - String formatting
 - Code organization and helper functions (v2)
+- Build automation with Make (optional for local development)

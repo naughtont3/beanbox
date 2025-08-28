@@ -19,22 +19,18 @@ for project_dir in src/*/; do
         echo "=== Testing project: $project_name ==="
         cd "$project_dir"
         
-        # Build the project
-        if [ -f "Makefile" ]; then
-            echo "Found Makefile, using make to build..."
-            make clean 2>/dev/null || true
-            make all
+        # Build the project using traditional Java compilation
+        java_files=(*.java)
+        if [ -e "${java_files[0]}" ]; then
+            echo "Compiling Java files using javac..."
+            # Clean up any existing .class files first
+            rm -f *.class 2>/dev/null || true
+            # Compile all Java files - javac automatically handles dependencies
+            javac *.java
         else
-            # No Makefile, try to compile Java files directly
-            java_files=(*.java)
-            if [ -e "${java_files[0]}" ]; then
-                echo "No Makefile found, compiling Java files directly..."
-                javac *.java
-            else
-                echo "No Java files found in $project_name, skipping..."
-                cd - > /dev/null
-                continue
-            fi
+            echo "No Java files found in $project_name, skipping..."
+            cd - > /dev/null
+            continue
         fi
         
         # Check for test.txt manifest file
