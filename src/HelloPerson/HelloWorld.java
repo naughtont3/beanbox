@@ -2,9 +2,16 @@
  * Short example for creating an instance of a Person class
  * and printing some output.
  *
- * @version v1
+ * @version v2
  */
 public class HelloWorld {
+
+    public static void sayInfo(Person p) {
+        System.out.println(String.format("%10s is %d",
+                                         p.getName(),
+                                         p.getAge()));
+        return;
+    }
 
     public static void main(String[] args) {
         // Instantiate Person using the constructor
@@ -15,22 +22,17 @@ public class HelloWorld {
         myBuddy.greet(mySister.getName());
         mySister.greet(myBuddy.getName());
 
-        System.out.println(String.format("%10s is %d",
-                                         myBuddy.getName(),
-                                         myBuddy.getAge()));
-
-        System.out.println(String.format("%10s is %d",
-                                         mySister.getName(),
-                                         mySister.getAge()));
+        sayInfo(myBuddy);
+        sayInfo(mySister);
 
         myBuddy.addToAge();
 
         System.out.println(String.format("HAPPY BIRTHDAY %s!",
                                          myBuddy.getName()));
 
-        System.out.println(String.format("%10s is %d",
-                                         myBuddy.getName(),
-                                         myBuddy.getAge()));
+        sayInfo(myBuddy);
+
+        return;
     }
 }
 
