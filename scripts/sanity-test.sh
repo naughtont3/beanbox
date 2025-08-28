@@ -42,8 +42,16 @@ for project_dir in src/*/; do
                     continue
                 fi
                 
-                # Parse class name and arguments
-                read -r class_name args <<< "$line"
+                # Parse class name and arguments more robustly
+                # Trim whitespace and split on first space
+                line=$(echo "$line" | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+                class_name=$(echo "$line" | cut -d' ' -f1)
+                args=$(echo "$line" | cut -d' ' -f2- | sed 's/^[[:space:]]*//')
+                
+                # If line has no spaces, args will be same as class_name, so clear it
+                if [ "$args" = "$class_name" ]; then
+                    args=""
+                fi
                 
                 echo "Testing: $class_name $args"
                 if java $class_name $args; then
