@@ -1,0 +1,39 @@
+# Continuous Integration workflow for cross-platform Java testing
+name: CI
+
+# Trigger CI on pushes and pull requests to main branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    # Run tests across multiple OS and Java versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # Test on Ubuntu (Linux) and macOS
+        os: [ubuntu-latest, macos-latest]
+        # Test with Java LTS versions 17 and 21
+        java-version: [17, 21]
+      # Continue testing other combinations even if one fails
+      fail-fast: false
+
+    steps:
+    # Checkout the repository code
+    - uses: actions/checkout@v4
+
+    # Set up Java Development Kit with specified version
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ matrix.java-version }}
+        # Use Eclipse Temurin distribution (formerly AdoptOpenJDK)
+        distribution: 'temurin'
+
+    # Execute the sanity test script to verify basic functionality
+    - name: Run sanity tests
+      run: ./scripts/sanity-test.sh
+      shell: bash
