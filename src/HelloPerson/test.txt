@@ -1,0 +1,6 @@
+# Test manifest for HelloPerson project
+# Format: ClassName [args...]
+# Lines starting with # are comments
+
+HelloWorld1
+HelloWorld2
