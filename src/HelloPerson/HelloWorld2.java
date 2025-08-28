@@ -4,7 +4,7 @@
  *
  * @version v2
  */
-public class HelloWorld {
+public class HelloWorld2 {
 
     public static void sayInfo(Person p) {
         System.out.println(String.format("%10s is %d",
